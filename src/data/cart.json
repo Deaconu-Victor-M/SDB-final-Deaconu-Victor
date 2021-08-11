@@ -1,0 +1,28 @@
+{
+  "cart": [
+    {
+      "bar_code": "312212",
+      "name": "Cheese",
+      "quantity_taken": 3,
+      "tot_price_prod": 36
+    },
+    {
+      "bar_code": "572214",
+      "name": "Beer",
+      "quantity_taken": 4,
+      "tot_price_prod": 40
+    },
+    {
+      "bar_code": "312212",
+      "name": "Cheese",
+      "quantity_taken": 3,
+      "tot_price_prod": 35
+    },
+    {
+      "bar_code": "314683",
+      "name": "Lemons",
+      "quantity_taken": 5,
+      "tot_price_prod": 16
+    }
+  ]
+}

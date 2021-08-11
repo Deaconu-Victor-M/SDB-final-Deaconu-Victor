@@ -1,0 +1,22 @@
+{
+  "promotions": [
+    {
+      "bar_code": "312212",
+      "name": "Cheese",
+      "firm": "Napolact",
+      "promotion": 30
+    },
+    {
+      "bar_code": "475932",
+      "name": "Coca Cola",
+      "firm": "Cola",
+      "promotion": 5
+    },
+    {
+      "bar_code": "123412",
+      "name": "pepsi",
+      "firm": "Pepsi",
+      "promotion": 4
+    }
+  ]
+}

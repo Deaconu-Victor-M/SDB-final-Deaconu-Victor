@@ -1,0 +1,76 @@
+{
+  "products": [
+    {
+      "bar_code": "312212",
+      "name": "Cheese",
+      "price": 11.69,
+      "firm": "Napolact",
+      "quantity": 69,
+      "promotion": 30
+    },
+    {
+      "bar_code": "572214",
+      "name": "Beer",
+      "price": 10.0,
+      "firm": "Stela",
+      "quantity": 5,
+      "promotion": -1
+    },
+    {
+      "bar_code": "123412",
+      "name": "pepsi",
+      "price": 2.5,
+      "firm": "Pepsi",
+      "quantity": 42,
+      "promotion": 4
+    },
+    {
+      "bar_code": "582612",
+      "name": "Chicken breast",
+      "price": 12.99,
+      "firm": "Woody breast",
+      "quantity": 10,
+      "promotion": -1
+    },
+    {
+      "bar_code": "314683",
+      "name": "Lemons",
+      "price": 3.21,
+      "firm": "Elmo's",
+      "quantity": 26,
+      "promotion": -1
+    },
+    {
+      "bar_code": "485732",
+      "name": "Watermelons",
+      "price": 7.99,
+      "firm": "Elmo's",
+      "quantity": 30,
+      "promotion": -1
+    },
+    {
+      "bar_code": "195731",
+      "name": "Lemons",
+      "price": 3.21,
+      "firm": "Elmo's",
+      "quantity": 26,
+      "promotion": -1
+    },
+    {
+      "bar_code": "648452",
+      "name": "Beer",
+      "price": 5.8,
+      "firm": "Heineken",
+      "quantity": 43,
+      "promotion": -1
+    },
+    {
+      "bar_code": "475932",
+      "name": "Coca Cola",
+      "price": 2.99,
+      "firm": "Cola",
+      "quantity": 0,
+      "promotion": 5
+    }
+  ]
+}
