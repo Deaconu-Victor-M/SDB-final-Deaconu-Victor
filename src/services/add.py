@@ -93,6 +93,7 @@ def do_add_product(product_entity:  Repo, checker: Checker):
     done_quantity = False
     while not done_quantity:
         quantity = input("Enter the quantity of the  product(press enter for None): ")
+        quantity =int(quantity)
         if quantity == "":
             new_quantity = 0
             done_quantity = True
