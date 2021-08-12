@@ -63,7 +63,9 @@ def proccess_save_product(product_instance_list: list) -> None:
                     "price": product.price,
                     "firm": product.firm,
                     "quantity": product.quantity,
-                    "promotion": product.promotion
+                    "promotion": product.promotion,
+                    "month": product.month,
+                    "year": product.year
                 }
             )
         _save = {"products": products_}
@@ -117,7 +119,9 @@ def proccess_save_promotions(promotions_instance_list: list) -> None:
                     "bar_code": product.bar_code,
                     "name": product.name,
                     "firm": product.firm,
-                    "promotion": product.promotion
+                    "promotion": product.promotion,
+                    "month": product.month,
+                    "year":product.year
                 }
             )
         _save = {"promotions": products_}

@@ -16,7 +16,9 @@ def import_data(product_instace_list: list, cart_instace_list: list, promotions_
                         product_["price"],
                         product_["firm"],
                         product_["quantity"],
-                        product_["promotion"]
+                        product_["promotion"],
+                        product_["month"],
+                        product_["year"]
                     )
                 )
     except FileNotFoundError:
@@ -48,7 +50,9 @@ def import_data(product_instace_list: list, cart_instace_list: list, promotions_
                         promotion["bar_code"],
                         promotion["name"],
                         promotion["firm"],
-                        promotion["promotion"]
+                        promotion["promotion"],
+                        promotion["month"],
+                        promotion["year"]
                     )
                 )
     except FileNotFoundError:

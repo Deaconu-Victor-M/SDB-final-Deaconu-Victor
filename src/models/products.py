@@ -13,10 +13,12 @@ class Products:
         quantity (int):Number of said product in the supermarket
     """
 
-    def __init__(self, bar_code: str, name: str, price: float, firm: str, quantity: int, promotion: int) -> None:
+    def __init__(self, bar_code: str, name: str, price: float, firm: str, quantity: int, promotion: int, month: int, year: int) -> None:
         self.bar_code = bar_code
         self.name = name
         self.price = price
         self.firm = firm
         self.quantity = quantity
         self.promotion = promotion
+        self.month = month
+        self.year = year

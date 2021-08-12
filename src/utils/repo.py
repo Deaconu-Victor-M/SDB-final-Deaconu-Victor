@@ -66,6 +66,10 @@ class Repo:
                     entity.quantity = kwargs["quantity"]
                 if "promotion" in kwargs and kwargs["promotion"] is not None:
                     entity.promotion = kwargs["promotion"]
+                if "month" in kwargs and kwargs["month"] is not None:
+                    entity.month = kwargs["month"]
+                if "year" in kwargs and kwargs["year"] is not None:
+                    entity.year = kwargs["year"]
                 return ("ok", "Updated successfully")
             else:
                 return ("fail", "Not found")

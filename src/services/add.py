@@ -1,3 +1,4 @@
+from datetime import datetime
 from models.products import Products
 from models.cart import Cart
 from models.promotions import Promotions
@@ -18,6 +19,8 @@ def do_add_product(product_entity:  Repo, checker: Checker):
     new_firm = ""
     new_quantity = None
     new_promotion = -1
+    new_month = -1
+    new_year = -1
     barcode_int= None
 
     _, products_list = product_entity.get()
@@ -114,7 +117,7 @@ def do_add_product(product_entity:  Repo, checker: Checker):
                     message="the price must be a numeric value",
                     go_back=False
                     ) 
-    product_entity.add(Products(new_barcode, new_name, new_price, new_firm, new_quantity, new_promotion))
+    product_entity.add(Products(new_barcode, new_name, new_price, new_firm, new_quantity, new_promotion, new_month, new_year))
     _, products_instance_list = product_entity.get()
     save_data(
         mode="single",
@@ -212,10 +215,15 @@ def do_add_cart(cart_entity:  Repo, checker: Checker, product_entity: Repo):
     
 
 def do_add_promotion(promotion_entity:  Repo, checker: Checker, product_entity: Repo):
+    day = datetime.today()
+    month_today = day.month
+    year_today = day.year
     new_promotion = None
     new_barcode = ""
     new_name = ""
     new_firm = ""
+    new_month = None
+    new_year = None
     exists = False
     print("In order to add a new product to the cart you need to it's bar code and it's name")
     input_ = input("Press enter  to see all the products: ")
@@ -231,7 +239,7 @@ def do_add_promotion(promotion_entity:  Repo, checker: Checker, product_entity: 
             table_data = [["Bar Code", "Product",  "Price", "Firm", "Promotion(y/n)"]]
             for product in products_list:
                 table_data.append([product.bar_code, product.name,
-                                  str(product.price), product.firm, "[YES]" if product.promotion != 1 else "[NO]"])
+                                  str(product.price), product.firm, f"{product.promotion}%-[YES]" if product.promotion != -1 else "[NO]"])
             product_table = SingleTable(table_data, title="Products")
             product_table.justify_columns = {
                 0: "center",
@@ -261,35 +269,81 @@ def do_add_promotion(promotion_entity:  Repo, checker: Checker, product_entity: 
                                 new_barcode = barcode
                                 new_name = product.name
                                 new_firm = product.firm
-                                try:
-                                    promotion = input(
-                                        "Enter the promotion you want your product to have: ")
-                                    promotion = int(promotion)
-                                    if promotion > 0 and promotion <= 100:
-                                        new_promotion = promotion
-                                        exists = True
-                                        done_all = True
-                                    elif promotion == 0:
+                                done_promo = False
+                                while not done_promo:
+                                    try:
+                                        promotion = input(
+                                            "Enter the promotion you want your product to have: ")
+                                        promotion = int(promotion)
+                                        if promotion > 0 and promotion <= 100:
+                                            new_promotion = promotion
+                                            done_promo = True
+                                        elif promotion == 0:
+                                            col.show(
+                                                title="Info",
+                                                message="Nothing has changed (promotion was 0.00%)"
+                                            )
+                                            break
+                                        else:
+                                            col.show(
+                                                title="Info",
+                                                message="Number to big or to small",
+                                                go_back=False
+                                            )
+                                    except ValueError:
                                         col.show(
-                                            title="Info",
-                                            message="Nothing has changed (promotion was 0.00%)"
-                                        )
-                                        break
-                                    else:
-                                        col.show(
-                                            title="Info",
-                                            message="Number to big or to small",
+                                            title="Warning",
+                                            message="The promotion must be numeric(int)",
                                             go_back=False
                                         )
-                                except ValueError:
-                                    col.show(
-                                        title="Warning",
-                                        message="The promotion must be numeric(int)",
-                                        go_back=False
-                                    )
+                                done_year = False
+                                while not done_year:
+                                    try:
+                                        year_input = input("Enter expiration year: ")
+                                        year_input = int(year_input)
+                                        if year_input >= year_today:
+                                            new_year = year_input
+                                            done_year = True
+                                        else:
+                                            col.show(
+                                                title="Info",
+                                                message="The year must be higher than today's year",
+                                                go_back=False
+                                            )
+                                    except ValueError:
+                                        col.show(
+                                            title="Info",
+                                            message="The year must be numeric(int) (higher than {year_today})",
+                                            go_back=False
+                                        )
+                                done_month = False
+                                while not done_month:
+                                    try:
+                                        month_input = input("Enter an expiration month: ")
+                                        month_input = int(month_input)
+                                        if new_year == year_today:
+                                            if month_input >= month_today and month_input < 13:
+                                                new_month = month_input
+                                                exists = True
+                                                done_all = True
+                                                done_month = True
+                                            else:
+                                                col.show(
+                                                    title="Info",
+                                                    message="The month must be higher than or equal to today's month)",
+                                                    go_back=False
+                                                )
+                                        elif month_input > 0 and month_input < 13:
+                                            new_month =  month_input
+                                    except ValueError:
+                                        col.show(
+                                            title="Info",
+                                            message="The month must be numeric(int) (between 1 and 12)",
+                                            go_back=False
+                                        )
                 if exists == True:
                     promotion_entity.add(Promotions(
-                        new_barcode, new_name, new_firm, new_promotion))
+                        new_barcode, new_name, new_firm, new_promotion, new_month, new_year))
                     save_data(
                         mode="single",
                         only="promotion",
@@ -298,7 +352,9 @@ def do_add_promotion(promotion_entity:  Repo, checker: Checker, product_entity: 
                     product_entity.update(
                         type_of_entity="product",
                         entity_id=barcode,
-                        promotion=new_promotion
+                        promotion=new_promotion,
+                        month=new_month,
+                        year=new_year
                     )
                     save_data(
                         mode="single",

@@ -6,7 +6,8 @@
 ---
 
 ## DEPENDENCIES: 
-- One dependecy: - `terminaltables` - install via `pip install terminaltables` *or* `pip install -r requirements.txt`
+- Main: - `terminaltables` - **install via** `pip install terminaltables` *or* `pip install -r requirements.txt`
+- Other: - `datetime`- **install via** `pip install datetime` *or* `pip install -r requirements.txt`
 
 ---
 

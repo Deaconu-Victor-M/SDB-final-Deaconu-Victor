@@ -5,6 +5,7 @@ from utils.repo import Repo
 import ui.console_delete as console
 import ui.console_one_line as col
 from services import add, delete, update
+from datetime import datetime
 
 
 class Options:
@@ -16,14 +17,19 @@ class Options:
 
     #? Client + Admin
     def show_products(self):
+        day = datetime.today()
+        month_today = day.month
+        year_today = day.year
         products_entity = Repo(self.products_instance_list)
         search, products_list = products_entity.get(mode="all")
 
         if search == "found" and len(products_list) != 0:
-            table_data = [["Bar Code", "Product", "Normal Price", "Firm", "Quantity", "Promotion"]]
+            table_data = [["Bar Code", "Product", "Price", "Firm", "Quantity", "Promotion"]]
             for product in products_list:
+                price_w_promotion = float(product.price  * product.promotion / 100) if product.promotion != -1 else product.price
                 table_data.append([product.bar_code, product.name,
-                                  str(product.price), product.firm, str(product.quantity), str(product.promotion) if product.promotion != -1 else "[NO]"])
+                                  str(format(price_w_promotion,  ".2f")), product.firm, str(product.quantity),
+                                  "[NO]" if product.promotion == -1 else f"{product.promotion}%-[ACTIVE]" if product.year >= year_today and product.month >= month_today or product.year >= year_today and product.month <= month_today else "[NO PROMOTION]" if product.promotion == -1 else "[INACTIVE]"])
             product_table = SingleTable(table_data, title="Products")
             product_table.justify_columns = {
                 0: "center",
@@ -31,7 +37,7 @@ class Options:
                 2: "center",
                 3: "left",
                 4: "center",
-                5: "center"
+                5: "left"
             }
             while True:
                 console.clear_console()
@@ -58,7 +64,7 @@ class Options:
         search, cart_list = cart_entity.get(mode="all")
 
         if search == "found" and len(cart_list) != 0:
-            table_data = [["Bar Code", "Product", "Quantity", "Price"]]
+            table_data = [["Bar Code", "Product", "Quantity", "Price", "Promotion"]]
             for product in cart_list:
                 table_data.append([str(product.bar_code), product.name, str(
                     product.quantity_taken), str(product.tot_price_prod)])
@@ -156,18 +162,23 @@ class Options:
                 )
 
     def show_product_promo(self):
+        day = datetime.today()
+        month_today = day.month
+        year_today = day.year
         promotion_entity = Repo(self.promotions_instance_list)
         search, promo_list = promotion_entity.get(mode="all")
         if search == "found" and len(promo_list) != 0:
-            table_data = [["Bar Code", "Product", "Firm", "promotion"]]
+            table_data = [["Bar Code", "Product", "Firm", "promotion", "Expiration date (mo/year)", "Activity"]]
             for product in promo_list:
-                table_data.append([product.bar_code, product.name, product.firm, f"{product.promotion}%"])
+                table_data.append([product.bar_code, product.name, product.firm, f"{product.promotion}%", f"{product.month}.{product.year}",
+                    "[ACTIVE]" if product.year >= year_today and product.month >= month_today or product.year >= year_today and product.month <= month_today else "[INACTIVE]"])
             promo_table = SingleTable(table_data, title="Products")
             promo_table.justify_columns = {
                 0: "center",
                 1: "center",
                 2: "center",
                 3: "center",
+                4: "center",
             }
             while True:
                 console.clear_console()

@@ -8,9 +8,11 @@ class Promotions:
         name (str): Nameofthe product
     """
 
-    def __init__(self, bar_code: str, name: str, firm: str, promotion: int) -> None:
+    def __init__(self, bar_code: str, name: str, firm: str, promotion: int, month: int, year: int) -> None:
         self.bar_code = bar_code
         self.name = name
         self.firm = firm
         self.promotion = promotion
+        self.month = month
+        self.year = year
         
