@@ -261,8 +261,25 @@ def do_add_promotion(promotion_entity:  Repo, checker: Checker, product_entity: 
                     if checker.check_if_exists_promo(bar_code=barcode):
                         col.show(
                             title="Info",
-                            message="This product already has a promotion"
+                            message="This product already has a promotion",
+                            go_back=False
                         )
+                        while True:
+                            input_yn = ""
+                            for promo_ in promotions_list:
+                                if promo_.bar_code == barcode:
+                                    if not promo_.year >= year_today and product.month >= month_today or product.year >= year_today and product.month <= month_today:
+                                        input_yn = input("[PROMOTION EXPIRED] Do you want to delete this promotion? (y/n): ")
+                            if input_yn == "n" or input_yn == "N":
+                                break
+                            elif input_yn == "y" or input_yn == "Y":
+                                promotion_entity.delete(barcode)
+                                save_data(
+                                    mode="single",
+                                    only="promotion",
+                                    promotions_instance_list=promotions_list,
+                                )
+                                break
                     elif isinstance(products_list[0], Products):
                         for product in products_list:
                             if  product.bar_code == barcode:
@@ -313,7 +330,7 @@ def do_add_promotion(promotion_entity:  Repo, checker: Checker, product_entity: 
                                     except ValueError:
                                         col.show(
                                             title="Info",
-                                            message="The year must be numeric(int) (higher than {year_today})",
+                                            message="The year must be numeric(int) (higher than today's year)",
                                             go_back=False
                                         )
                                 done_month = False

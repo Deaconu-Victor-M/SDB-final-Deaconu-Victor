@@ -1,36 +1,43 @@
 {
-  "promotions": [
-    {
-      "bar_code": "312212",
-      "name": "Cheese",
-      "firm": "Napolact",
-      "promotion": 30,
-      "month": 2,
-      "year": 2022
-    },
-    {
-      "bar_code": "475932",
-      "name": "Coca Cola",
-      "firm": "Cola",
-      "promotion": 5,
-      "month": 9,
-      "year": 2020
-    },
-    {
-      "bar_code": "123412",
-      "name": "pepsi",
-      "firm": "Pepsi",
-      "promotion": 4,
-      "month": 1,
-      "year": 2023
-    },
-    {
-      "bar_code": "572214",
-      "name": "Beer",
-      "firm": "Stela",
-      "promotion": 50,
-      "month": 9,
-      "year": 2021
-    }
-  ]
+    "promotions": [{
+            "bar_code": "312212",
+            "name": "Cheese",
+            "firm": "Napolact",
+            "promotion": 30,
+            "month": 2,
+            "year": 2022
+        },
+        {
+            "bar_code": "475932",
+            "name": "Coca Cola",
+            "firm": "Cola",
+            "promotion": 5,
+            "month": 9,
+            "year": 2020
+        },
+        {
+            "bar_code": "123412",
+            "name": "pepsi",
+            "firm": "Pepsi",
+            "promotion": 4,
+            "month": 1,
+            "year": 2023
+        },
+        {
+            "bar_code": "572214",
+            "name": "Beer",
+            "firm": "Stela",
+            "promotion": 50,
+            "month": 9,
+            "year": 2021
+        },
+        {
+            "bar_code": "738423",
+            "name": "Paine",
+            "firm": "Auchan",
+            "promotion": 13,
+            "month": 11,
+            "year": 2021
+        }
+    ]
 }

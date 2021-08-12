@@ -55,5 +55,3 @@ def do_remove_product(product_entity: Repo, checker: Checker):
                     message="Invalid Bar Code!",
                     go_back=False
                 )
-
-#!Client remove  from cart

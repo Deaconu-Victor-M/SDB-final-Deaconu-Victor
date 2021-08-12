@@ -96,9 +96,9 @@
       "price": 4.99,
       "firm": "Auchan",
       "quantity": 100,
-      "promotion": -1,
-      "month": -1,
-      "year": -1
+      "promotion": 13,
+      "month": 11,
+      "year": 2021
     }
   ]
 }
