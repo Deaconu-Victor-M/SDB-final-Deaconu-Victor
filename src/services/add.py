@@ -180,7 +180,7 @@ def do_add_cart(cart_entity:  Repo, checker: Checker, product_entity: Repo):
                                 if quantity_taken <= entity.quantity:
                                     new_quantity_taken = quantity_taken
                                     updated_quantity = entity.quantity - quantity_taken
-                                    new_tot_price_prod = int(
+                                    new_tot_price_prod = float(
                                         entity.price * new_quantity_taken)
                                     done_all = True
                                 else:
