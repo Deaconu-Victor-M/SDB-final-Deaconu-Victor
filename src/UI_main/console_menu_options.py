@@ -64,7 +64,7 @@ class Options:
         search, cart_list = cart_entity.get(mode="all")
 
         if search == "found" and len(cart_list) != 0:
-            table_data = [["Bar Code", "Product", "Quantity", "Price", "Promotion"]]
+            table_data = [["Bar Code", "Product", "Quantity", "Price"]]
             for product in cart_list:
                 table_data.append([str(product.bar_code), product.name, str(
                     product.quantity_taken), str(product.tot_price_prod)])
